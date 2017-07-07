@@ -16,7 +16,7 @@ do
             docker stop c9
             ;;
         "Quit")
-		    echo "Bye !"
+	    echo "Bye !"
             break
             ;;
         *) echo invalid option;;
