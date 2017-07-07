@@ -1,0 +1,13 @@
+$ cp .env.dist .env
+$ docker-compose build
+$ docker-compose up -d
+$ docker-compose run --rm --entrypoint bash phpapp
+# composer install
+
+IDE Cloud9 :
+$ docker run -it -d -p 8878:80 -v $(pwd):/workspace/ --name c9 kdelfour/cloud9-docker
+
+* SF CMD
+
+docker-compose exec phpapp bin/console cache:clear --no-warmup
+docker-compose exec phpapp bin/console cache:warmup

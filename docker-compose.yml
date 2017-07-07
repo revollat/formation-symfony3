@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+    phpapp:
+        build: docker-sfapp
+        entrypoint: bin/console server:run 0.0.0.0:8000
+        ports:
+            - 8877:8000
+        volumes:
+            - ${SYMFONY_APP_PATH}:/var/www/symfony
