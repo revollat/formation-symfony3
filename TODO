@@ -1,7 +1,7 @@
 
-Theme de formulaire :
-https://symfony.com/doc/current/form/form_customization.html
+Ajout contrainte not blank au champ Titre d'un livre.
 
-Les themes se trouvent dans :
-vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form
+Faire un 
+docker-compose exec phpapp bin/console doctrine:schema:update --force
+après avoir ajouter nullable true au champ description
 
