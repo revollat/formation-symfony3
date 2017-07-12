@@ -1,0 +1,45 @@
+<script>
+
+    var $collectionHolder;
+    var $addCritiqueLink = $('<a href="#" class="add_critique_link">Ajouter une critique</a>');
+    
+    jQuery(document).ready(function() {
+        $collectionHolder = $('#appbundle_livre_critiques');
+        $collectionHolder.append($addCritiqueLink);
+        
+        $collectionHolder.data('index', $collectionHolder.children('div.row').length);
+        
+        $addCritiqueLink.on('click', function(e) {
+            e.preventDefault();
+            addCritiqueForm($collectionHolder, $addCritiqueLink);
+        });
+        
+        // $collectionHolder.children('div.row').each(function() {
+        //     addCritiqueFormDeleteLink($(this));
+        // });
+    
+    });
+    
+    function addCritiqueForm($collectionHolder, $addCritiqueLink) {
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.data('index');
+        
+        var newForm = prototype.replace(/__name__label__/g, "<h2>Critique " + index + "</h2>");
+        newForm = newForm.replace(/__name__/g, index);
+        $collectionHolder.data('index', index + 1);
+        $addCritiqueLink.before(newForm);
+        
+        //addCritiqueFormDeleteLink(newForm);
+        
+    }
+    
+    // function addCritiqueFormDeleteLink($element) {
+    //     var $removeFormA = $('<a href="#">Supprimer cette critique</a>');
+    //     $element.append($removeFormA);
+    //     $removeFormA.on('click', function(e) {
+    //         e.preventDefault();
+    //         $element.remove();
+    //     });
+    // }
+    
+</script>

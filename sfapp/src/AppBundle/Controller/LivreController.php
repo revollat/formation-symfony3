@@ -6,6 +6,7 @@ use AppBundle\Entity\Livre;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Livre controller.
@@ -85,7 +86,22 @@ class LivreController extends Controller
         $editForm = $this->createForm('AppBundle\Form\LivreType', $livre);
         $editForm->handleRequest($request);
 
+        // $originalCritiques = new ArrayCollection();
+        // foreach ($livre->getCritiques() as $critique) {
+        //     $originalCritiques->add($critique);
+        // }
+    
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+
+            // foreach ($originalCritiques as $critique) {
+            //     if (false === $livre->getCritiques()->contains($critique)) {
+            //         $critique->getLivres()->removeElement($livre);
+            //         $this->getDoctrine()->getManager()->persist($critique);
+            //         $this->getDoctrine()->getManager()->remove($critique);
+            //     }
+            // }
+            
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('livre_admin_edit', array('id' => $livre->getId()));

@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -27,6 +28,20 @@ class Livre
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+    
+    /**
+     * Un livre peut
+     * @ORM\OneToMany(targetEntity="Critique", mappedBy="livre", cascade={"persist"})
+     */
+    private $critiques;
+
+    public function __construct() {
+        $this->critiques = new ArrayCollection();
+    }
+    
+    public function __toString() {
+        return $this->getTitre();
+    }
 
     /**
      * Get id
@@ -84,5 +99,41 @@ class Livre
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add critique
+     *
+     * @param \AppBundle\Entity\Critique $critique
+     *
+     * @return Livre
+     */
+    public function addCritique(\AppBundle\Entity\Critique $critique)
+    {
+        $this->critiques[] = $critique;
+        
+        $critique->setLivre($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove critique
+     *
+     * @param \AppBundle\Entity\Critique $critique
+     */
+    public function removeCritique(\AppBundle\Entity\Critique $critique)
+    {
+        $this->critiques->removeElement($critique);
+    }
+
+    /**
+     * Get critiques
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCritiques()
+    {
+        return $this->critiques;
     }
 }

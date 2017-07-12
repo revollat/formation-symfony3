@@ -1,7 +1,22 @@
 
-Ajout contrainte not blank au champ Titre d'un livre.
+Génération d'une entité critique (un livre peut avoir zéro ou plusieurs critiques)
 
-Faire un 
+docker-compose exec phpapp bin/console doctrine:generate:entity --entity=AppBundle:Critique --format=annotation --fields="email:string(255) note:smallint avis:text" --no-interaction
+
+
+Ajouter les annotation pour assitiation OneToMany puis :
+
+docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Critique
+docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Livre
 docker-compose exec phpapp bin/console doctrine:schema:update --force
-après avoir ajouter nullable true au champ description
+
+Génération du formulaire Critique :
+docker-compose exec phpapp bin/console doctrine:generate:form AppBundle:Critique --no-interaction
+
+Ajouter les magic methodes toString aux entités
+
+Ajouter Collection dans formulaire Livre (https://symfony.com/doc/current/form/form_collections.html)
+
+Y'a un plugin JQuery pour les form collection : https://github.com/ninsuo/symfony-collection
+
 
