@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <script src="/js/jquery-3.2.1.min.js"></script>
-        {% block stylesheets %}
-            <link rel="stylesheet" type="text/css" href="/css/foundation.min.css">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html class="no-js" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Symfony 3</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/foundation.min.css">
+    {% endblock %}
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="large-12 columns" role="content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    
+</body>
+
 </html>
