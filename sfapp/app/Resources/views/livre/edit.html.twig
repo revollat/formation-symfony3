@@ -1,12 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme edit_form _self %}
-
-{%- block form_widget_simple -%}
-    {%- set type = type|default('text') -%}
-    <p>Ceci n'est pas un test </p>
-    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-{%- endblock form_widget_simple -%}
+{% form_theme edit_form 'form/fields.html.twig' %}
 
 {% block body %}
     <h1>Livre edit</h1>
