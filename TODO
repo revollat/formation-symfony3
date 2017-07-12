@@ -1,19 +1,7 @@
 
-* Creation de la BDD (doctrine:database:drop --force pour la supprimer)
-docker-compose exec phpapp bin/console doctrine:database:create
+Theme de formulaire :
+https://symfony.com/doc/current/form/form_customization.html
 
-* On a générer une entitée dans AppBundle\Entity\Livre
-on aurait aussi pu le faire avec  : docker-compose exec phpapp bin/console doctrine:generate:entity
+Les themes se trouvent dans :
+vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form
 
-
-* Synchronisation du shcema de la BDD
-docker-compose exec phpapp bin/console doctrine:schema:update --force
-
-* Générer les getter et setter
-docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Livre
-
-* Générer CRUD 
-docker-compose exec phpapp bin/console doctrine:generate:crud --entity=AppBundle:Livre --route-prefix=livre_admin --with-write --no-interaction
-
-* CHECK 
-http://127.0.0.1:8877/livre_admin
