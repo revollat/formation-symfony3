@@ -13,11 +13,17 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        return $this->render('default/index.html.twig');
+    }
+    
+    public function livresAccueilAction($max = 3)
+    {
         
         $em = $this->getDoctrine()->getManager();
-        $livres = $em->getRepository('AppBundle:Livre')->findAll();
-        return $this->render('default/index.html.twig', [
+        $livres = $em->getRepository('AppBundle:Livre')->getLivresAccueil($max);
+        return $this->render('default/_livres_accueil.html.twig', [
             'livres' => $livres
         ]);
     }
+    
 }
