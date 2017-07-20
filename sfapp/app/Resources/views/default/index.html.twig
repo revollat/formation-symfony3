@@ -2,6 +2,14 @@
 
 {% block body %}
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div data-alert class="alert-box success radius">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <h1>Page d'accueil !</h1>
     
     <p>
