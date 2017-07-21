@@ -26,3 +26,8 @@ services:
             - 8877:8000
         volumes:
             - ${SYMFONY_APP_PATH}:/var/www/symfony
+            
+    mailcatcher:
+        image: schickling/mailcatcher
+        ports:
+            - "8879:1080"

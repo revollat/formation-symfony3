@@ -20,20 +20,37 @@ class DefaultController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request)
+    public function contactAction(Request $request, \Swift_Mailer $mailer)
     {
+        
         $form = $this->createForm(ContactType::class);
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $data = $form->getData();
+            
+            $message = (new \Swift_Message($data['sujet']))
+                ->setFrom($data['email'])
+                ->setTo('contact@example.com')
+                ->setBody(
+                    $this->render('default/mail.html.twig', [
+                        'message' => $data['message']
+                    ]) 
+                )
+                ->setContentType("text/html")
+            ;
+                
+            $mailer->send($message);
+            
             $this->addFlash(
                 'notice',
                 'Message envoyé à ' . $data['email']
             );
         
             return $this->redirectToRoute('homepage');
+            
         }
         
         return $this->render('default/contact.html.twig', [
