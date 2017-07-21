@@ -1,5 +1,5 @@
 <ul>
     {% for livre in livres %}
-        <li>{{ livre.titre }}</li>
+        <li><a href="{{ path('detail_livre', { 'slug': livre.slug }) }}">{{ livre.titre }}</a></li>
     {% endfor %}
 </ul>

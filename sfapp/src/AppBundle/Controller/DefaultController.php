@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactType;
+use AppBundle\Entity\Livre;
 
 class DefaultController extends Controller
 {
@@ -15,6 +16,25 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('default/index.html.twig');
+    }
+    
+    /**
+     * @Route("/livre/{slug}", name = "detail_livre")
+     */
+    public function detailLivreAction(Request $request, $slug)
+    {
+        $livre = $this->getDoctrine()
+            ->getRepository(Livre::class)
+            ->findOneBy(array('slug' => $slug));
+    
+        if (!$livre) {
+            throw $this->createNotFoundException();
+        }
+    
+        return $this->render('default/detail_livre.html.twig', [
+            'livre' => $livre
+        ]);
+        
     }
     
     /**
