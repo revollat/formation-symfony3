@@ -1,1 +1,2 @@
-Debug
+
+docker-compose exec phpapp bin/console doctrine:fixtures:load
