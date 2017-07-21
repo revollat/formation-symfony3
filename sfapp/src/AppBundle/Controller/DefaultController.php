@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactType;
@@ -18,19 +19,15 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig');
     }
     
+    
+
+
     /**
      * @Route("/livre/{slug}", name = "detail_livre")
+     * @ParamConverter("livre", options={"mapping": {"slug": "slug"}})
      */
-    public function detailLivreAction(Request $request, $slug)
+    public function detailLivreAction(Request $request, Livre $livre)
     {
-        $livre = $this->getDoctrine()
-            ->getRepository(Livre::class)
-            ->findOneBy(array('slug' => $slug));
-    
-        if (!$livre) {
-            throw $this->createNotFoundException();
-        }
-    
         return $this->render('default/detail_livre.html.twig', [
             'livre' => $livre
         ]);
