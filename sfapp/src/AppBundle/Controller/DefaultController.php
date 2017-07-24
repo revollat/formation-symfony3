@@ -35,6 +35,20 @@ class DefaultController extends Controller
     }
     
     /**
+     * @Route("/get-critiques/{slug}", name = "get_json_critiques_pour_livre")
+     * @ParamConverter("livre", options={"mapping": {"slug": "slug"}})
+     */
+    public function getJsonCritiquesPourLivre(Request $request, Livre $livre)
+    {
+        $critiques = $livre->getCritiques();
+        // foreach ($critiques as $critique){
+        //     $this->get('serializer')->serialize($critique, 'json');
+        // }
+        
+        return $this->json($critiques);
+    }
+    
+    /**
      * @Route("/contact", name="contact")
      */
     public function contactAction(Request $request, \Swift_Mailer $mailer)

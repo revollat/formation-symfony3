@@ -1,7 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
 <h1>{{ livre.titre }}</h1>
+
+<a id="voir-critiques" href="{{ path ( 'get_json_critiques_pour_livre', { slug: livre.slug } ) }}" class="button info">Voir les critiques</a>
+
+<div id="critiques-associees"></div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="/js/handlebars-v4.0.10.js"></script>
+
+<script id="critiques-template" type="text/x-handlebars-template">
+    {% raw %}
+    <hr>
+    <div>
+        <div>Email : {{ email }}</div>
+        <div>Note : {{ note }}</div>
+        <div>Avis : {{ avis }}</div>
+    </div>
+    {% endraw  %}
+</script>
+
+<script>
+var raw_template = $('#critiques-template').html();
+var template = Handlebars.compile(raw_template);
+  
+$( "#voir-critiques" ).click(function( event ) {
+  event.preventDefault();
+  $.getJSON($(this).attr('href'),function(data){
+        $.each(data,function(index,element){
+          var html = template(element);
+          $('#critiques-associees').append(html);
+        });
+  });
+  
+});
+</script>
 
 {% endblock %}
