@@ -3,6 +3,14 @@ namespace AppBundle\Twig;
 
 class AppExtension extends \Twig_Extension
 {
+    
+    private $remplacements;
+    
+    public function __construct($remplacements)
+    {
+        $this->remplacements = $remplacements;
+    }
+    
     public function getFilters()
     {
         return array(
@@ -12,6 +20,9 @@ class AppExtension extends \Twig_Extension
 
     public function lolcatMe($text)
     {
-        return mb_ereg_replace("chat", "🐱", $text);
+        foreach($this->remplacements as $remplacement => $valeur){
+            $text = mb_ereg_replace($remplacement, $valeur, $text);
+        }
+        return $text;
     }
 }
