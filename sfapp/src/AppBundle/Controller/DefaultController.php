@@ -8,15 +8,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactType;
 use AppBundle\Entity\Livre;
+use AppBundle\Service\Citation;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, Citation $citation)
     {
-        return $this->render('default/index.html.twig');
+        //$citation = $this->get(Citation::class); // On pourrais aussi récupérer le service via son ID (i.e. le nom de la classe automatiquement attibué à la compilation du DIC, cf. service.yml )
+        return $this->render('default/index.html.twig',[
+            'citation' => $citation->getCitation()
+        ]);
     }
     
     
