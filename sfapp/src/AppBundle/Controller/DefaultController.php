@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactType;
 use AppBundle\Entity\Livre;
-
 use AppBundle\Service\NotificationAffichageCitation;
+use AppBundle\Event\LivreVuEvent;
 
 class DefaultController extends Controller
 {
@@ -29,6 +29,10 @@ class DefaultController extends Controller
      */
     public function detailLivreAction(Request $request, Livre $livre)
     {
+        
+        $event = new LivreVuEvent($livre);
+        $this->get('event_dispatcher')->dispatch(LivreVuEvent::NAME, $event);
+      
         return $this->render('default/detail_livre.html.twig', [
             'livre' => $livre
         ]);

@@ -51,3 +51,13 @@ services:
             - '2017-08-31'
         tags:
             - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+    AppBundle\EventListener\LoggerOnLivreVu:
+        #arguments:         ------------> NON NECESSAIRE GRACE A L'AUTOWIRE
+        #    - "@logger"                  de symfony à partir de la version3.3
+        tags:
+            - { name: kernel.event_listener, event: app.livre.vu, method: process }
+            
+    AppBundle\EventListener\MailOnLivreVu:
+        tags:
+            - { name: kernel.event_listener, event: app.livre.vu, method: envoiMail }

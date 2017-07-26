@@ -1,2 +1,3 @@
 
-docker-compose exec phpapp bin/console debug:event-dispatcher kernel.response
+docker-compose exec phpapp bin/console debug:event-dispatcher app.livre.vu
+
