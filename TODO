@@ -1,2 +1,2 @@
 
-docker-compose exec phpapp bin/console debug:event-dispatcher kernel.exception
+docker-compose exec phpapp bin/console debug:event-dispatcher kernel.response

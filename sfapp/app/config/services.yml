@@ -45,6 +45,9 @@ services:
         arguments:
             $remplacements: '%lolcat_remplacements%'
             
-    AppBundle\EventListener\ExceptionListener:
+    AppBundle\Beta\BetaListener:
+        arguments:
+            - '@AppBundle\Beta\BetaHTMLAdder'
+            - '2017-08-31'
         tags:
-            - { name: kernel.event_listener, event: kernel.exception }
+            - { name: kernel.event_listener, event: kernel.response, method: processBeta }
