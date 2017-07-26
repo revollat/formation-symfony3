@@ -44,3 +44,7 @@ services:
     AppBundle\Twig\AppExtension:
         arguments:
             $remplacements: '%lolcat_remplacements%'
+            
+    AppBundle\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }

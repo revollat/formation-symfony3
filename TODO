@@ -1,9 +1,2 @@
 
-
-Regénère getter et Setter si besoin:
-docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Livre
-
-docker-compose exec phpapp bin/console doctrine:database:drop --force
-docker-compose exec phpapp bin/console doctrine:database:create
-docker-compose exec phpapp bin/console doctrine:schema:update --force
-docker-compose exec phpapp bin/console doctrine:fixtures:load
+docker-compose exec phpapp bin/console debug:event-dispatcher kernel.exception
