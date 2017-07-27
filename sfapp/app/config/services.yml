@@ -61,3 +61,12 @@ services:
     AppBundle\EventListener\MailOnLivreVu:
         tags:
             - { name: kernel.event_listener, event: app.livre.vu, method: envoiMail }
+
+    AppBundle\EventListener\LivreSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    # AppBundle\EventListener\SearchIndexer:
+    #     class: AppBundle\EventListener\SearchIndexer
+    #     tags:
+    #         - { name: doctrine.event_listener, event: postPersist }
