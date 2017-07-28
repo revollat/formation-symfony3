@@ -15,7 +15,7 @@ RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 RUN "date"
 
-# Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql opcache
+COPY config/php.ini /usr/local/etc/php/
 
 WORKDIR /var/www/symfony

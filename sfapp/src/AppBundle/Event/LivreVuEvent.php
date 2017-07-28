@@ -1,4 +1,4 @@
-<?
+<?php
 namespace AppBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
@@ -14,7 +14,7 @@ class LivreVuEvent extends Event
     {
         $this->livre = $livre;
     }
-
+    
     public function getLivre()
     {
         return $this->livre;
