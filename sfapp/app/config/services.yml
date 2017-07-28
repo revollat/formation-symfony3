@@ -66,7 +66,13 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
     
-    # AppBundle\EventListener\SearchIndexer:
-    #     class: AppBundle\EventListener\SearchIndexer
-    #     tags:
-    #         - { name: doctrine.event_listener, event: postPersist }
+    AppBundle\DataCollector\RequestCollector:
+        tags:
+            -
+                name:     data_collector
+                template: 'data_collector/template.html.twig'
+                # must match the value returned by the getName() method
+                id:       'app.request_collector'
+                # optional priority
+                # priority: 300
+        public: false
