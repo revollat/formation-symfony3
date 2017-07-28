@@ -6,6 +6,7 @@ parameters:
         chat: 🐱
         Socrate: 👨
         mortel: (✖╭╮✖)
+    couverture_directory: '%kernel.project_dir%/web/uploads/couvertures'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -76,3 +77,13 @@ services:
                 # optional priority
                 # priority: 300
         public: false
+        
+    AppBundle\Service\FileUploader:
+        arguments:
+            $targetDir: '%couverture_directory%'
+            
+    AppBundle\EventListener\CouvertureUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            #- { name: doctrine.event_listener, event: postLoad }

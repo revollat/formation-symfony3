@@ -37,6 +37,12 @@ class Livre
     private $description;
     
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Image()
+     */
+    private $couverture;
+    
+    /**
      * Un livre peut
      * @ORM\OneToMany(targetEntity="Critique", mappedBy="livre", cascade={"persist"})
      */
@@ -166,5 +172,29 @@ class Livre
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set couverture
+     *
+     * @param string $couverture
+     *
+     * @return Livre
+     */
+    public function setCouverture($couverture)
+    {
+        $this->couverture = $couverture;
+
+        return $this;
+    }
+
+    /**
+     * Get couverture
+     *
+     * @return string
+     */
+    public function getCouverture()
+    {
+        return $this->couverture;
     }
 }

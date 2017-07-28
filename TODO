@@ -1,3 +1,6 @@
 
-docker-compose exec phpapp bin/console debug:event-dispatcher app.livre.vu
+docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Livre
+
+docker-compose exec phpapp bin/console doctrine:schema:update --force
+
 
