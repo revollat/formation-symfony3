@@ -33,20 +33,6 @@ class DefaultController extends Controller
         $event = new LivreVuEvent($livre);
         $this->get('event_dispatcher')->dispatch(LivreVuEvent::NAME, $event);
         
-        $repartoire = $this->container->getParameter('couverture_directory');
-        $file_path =  $repartoire . '/' . $livre->getCouverture();
-        $mini_file_path = $repartoire . '/mini_' . $livre->getCouverture();
-        
-        if( $livre->getCouverture() && ! $this->get('filesystem')->exists($mini_file_path) ){  // la miniature n'existe pas encore on la crée
-            $imagine = new \Imagine\Gd\Imagine();
-            $size    = new \Imagine\Image\Box(150, 150);
-            $mode    = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
-            $imagine->open($file_path)
-                ->thumbnail($size, $mode)
-                ->save($mini_file_path)
-            ;
-        }
-
         return $this->render('default/detail_livre.html.twig', [
             'livre' => $livre
         ]);
