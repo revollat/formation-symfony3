@@ -3,7 +3,7 @@
 {% block body %}
 <h1>{{ livre.titre }}</h1>
 
-<img src="{{ asset('uploads/couvertures/' ~ livre.couverture) }}" />
+<img src="{{ asset('uploads/couvertures/mini_' ~ livre.couverture) }}" />
 
 <a id="voir-critiques" href="{{ path ( 'get_json_critiques_pour_livre', { slug: livre.slug } ) }}" class="button info">Voir les critiques</a>
 

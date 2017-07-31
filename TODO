@@ -1,6 +1,7 @@
 
-docker-compose exec phpapp bin/console doctrine:generate:entities --no-interaction --no-backup  AppBundle:Livre
+Reconstruire le container avec libGD :
+docker-compose build --pull --no-cache phpapp
 
-docker-compose exec phpapp bin/console doctrine:schema:update --force
-
+Démarrer avec le nouveau container
+docker-compose stop phpapp && docker-compose rm -f phpapp && docker-compose up -d phpapp
 
