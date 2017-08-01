@@ -1,1 +1,8 @@
-Hello World!
+{% extends '@Acme/layout.html.twig' %}
+
+{% block titre %}{{ parent() }} - Page accueil{% endblock %}
+
+{% block body %}
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis nisl nec tempor sagittis. Aliquam lectus odio, elementum vitae augue nec, congue rutrum sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus sodales ultricies tortor, a imperdiet orci tempor a. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla nisl lorem, condimentum a ligula ut, venenatis eleifend nisl. Donec tempus orci sit amet leo luctus, id sodales sem blandit. Duis at lectus nisi. Suspendisse laoreet dolor mi. Nunc dui lacus, aliquam quis aliquet non, faucibus a nunc. Curabitur scelerisque dui mattis porta porttitor. </p>
+    <img src="{{ asset('bundles/acme/images/bagel.jpg') }}" />
+{% endblock %}

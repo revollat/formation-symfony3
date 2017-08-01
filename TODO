@@ -1,7 +1,2 @@
 
-Reconstruire le container avec libGD :
-docker-compose build --pull --no-cache phpapp
-
-Démarrer avec le nouveau container
-docker-compose stop phpapp && docker-compose rm -f phpapp && docker-compose up -d phpapp
-
+docker-compose exec phpapp bin/console assets:install web --symlink --relative
