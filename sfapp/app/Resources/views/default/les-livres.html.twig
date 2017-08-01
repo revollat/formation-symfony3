@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des livres</h1>
+
+    <div class="count">
+        {{ pagination.getTotalItemCount }} Livre(s)
+    </div>
+    
+    <table>
+        
+        <thead>
+            <tr>
+                <th>Couverture</th>
+                <th>Titre</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {% for livre in pagination %}
+        
+            {% set couverture %}
+                {% if livre.couverture is null %}
+                    <img src="{{ asset('/images/default_livre.jpg') | imagine_filter('livre_listing') }}" />
+                {% else %}
+                    <img src="{{ asset('/uploads/couvertures/' ~ livre.couverture) | imagine_filter('livre_listing') }}" />
+                {% endif %}
+            {% endset %}
+            
+            <tr>
+                <td>{{ couverture }}</td>
+                <td><a href="{{ path('detail_livre', { 'slug': livre.slug }) }}">{{ livre.titre }}</a></td>
+                <td>{{ livre.description }}</td>
+            </tr>
+            
+        {% endfor %}
+        </tbody>
+        
+    </table>
+    
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+
+{% endblock %}

@@ -46,37 +46,37 @@ services:
         arguments:
             $remplacements: '%lolcat_remplacements%'
             
-    AppBundle\Beta\BetaListener:
-        arguments:
-            - '@AppBundle\Beta\BetaHTMLAdder'
-            - '2017-08-31'
-        tags:
-            - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+    # AppBundle\Beta\BetaListener:
+    #     arguments:
+    #         - '@AppBundle\Beta\BetaHTMLAdder'
+    #         - '2017-08-31'
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.response, method: processBeta }
 
-    AppBundle\EventListener\LoggerOnLivreVu:
-        #arguments:         ------------> NON NECESSAIRE GRACE A L'AUTOWIRE
-        #    - "@logger"                  de symfony à partir de la version3.3
-        tags:
-            - { name: kernel.event_listener, event: app.livre.vu, method: process }
+    # AppBundle\EventListener\LoggerOnLivreVu:
+    #     #arguments:         ------------> NON NECESSAIRE GRACE A L'AUTOWIRE
+    #     #    - "@logger"                  de symfony à partir de la version3.3
+    #     tags:
+    #         - { name: kernel.event_listener, event: app.livre.vu, method: process }
             
-    AppBundle\EventListener\MailOnLivreVu:
-        tags:
-            - { name: kernel.event_listener, event: app.livre.vu, method: envoiMail }
+    # AppBundle\EventListener\MailOnLivreVu:
+    #     tags:
+    #         - { name: kernel.event_listener, event: app.livre.vu, method: envoiMail }
 
     AppBundle\EventListener\LivreSubscriber:
         tags:
             - { name: doctrine.event_subscriber }
     
-    AppBundle\DataCollector\RequestCollector:
-        tags:
-            -
-                name:     data_collector
-                template: 'data_collector/template.html.twig'
-                # must match the value returned by the getName() method
-                id:       'app.request_collector'
-                # optional priority
-                # priority: 300
-        public: false
+    # AppBundle\DataCollector\RequestCollector:
+    #     tags:
+    #         -
+    #             name:     data_collector
+    #             template: 'data_collector/template.html.twig'
+    #             # must match the value returned by the getName() method
+    #             id:       'app.request_collector'
+    #             # optional priority
+    #             # priority: 300
+    #     public: false
         
     AppBundle\Service\FileUploader:
         arguments:

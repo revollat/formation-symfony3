@@ -21,3 +21,9 @@
 
 /web/media/cache/my_thumb/uploads/couvertures/*
 !web/media/cache/my_thumb/uploads/couvertures/.gitkeep
+
+/web/media/cache/livre_listing/uploads/couvertures/*
+!web/media/cache/livre_listing/uploads/couvertures/.gitkeep
+
+/web/media/cache/livre_page_detail/uploads/couvertures/*
+!web/media/cache/livre_page_detail/uploads/couvertures/.gitkeep

@@ -1,13 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>{{ livre.titre }}</h1>
 
-<img src="{{ asset('/uploads/couvertures/' ~ livre.couverture) | imagine_filter('my_thumb') }}" />
+<a href="{{ path('les_livres') }}" class="button">Retour à la liste</a>
 
-<a id="voir-critiques" href="{{ path ( 'get_json_critiques_pour_livre', { slug: livre.slug } ) }}" class="button info">Voir les critiques</a>
+{% set couverture %}
+  {% if livre.couverture is null %}
+      <img class="th [radius]" src="{{ asset('/images/default_livre.jpg') | imagine_filter('livre_page_detail') }}" />
+  {% else %}
+      <img  class="th [radius]" src="{{ asset('/uploads/couvertures/' ~ livre.couverture) | imagine_filter('livre_page_detail') }}" />
+  {% endif %}
+{% endset %}
 
-<div id="critiques-associees"></div>
+<div class="row">
+  <div class="large-12 columns"><h1>{{ livre.titre }}</h1></div>
+</div>
+
+<div class="row">
+  <div class="small-4 columns">{{ couverture }}</div>
+  <div class="small-8 columns">{{ livre.description }}</div>
+</div>
+
+<hr/>
+
+<div id="critiques-associees">
+  <a id="voir-critiques" href="{{ path ( 'get_json_critiques_pour_livre', { slug: livre.slug } ) }}" class="button info">Voir les critiques</a>
+</div>
+
+  
 {% endblock %}
 
 {% block javascripts %}

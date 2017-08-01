@@ -10,6 +10,8 @@ use AppBundle\Form\ContactType;
 use AppBundle\Entity\Livre;
 use AppBundle\Service\NotificationAffichageCitation;
 use AppBundle\Event\LivreVuEvent;
+use Knp\Component\Pager\Paginator;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class DefaultController extends Controller
 {
@@ -22,6 +24,23 @@ class DefaultController extends Controller
             'citation' => $notif->notification()
         ]);
     }
+    
+    /**
+     * @Route("/les-livres/{page}", name="les_livres")
+     */
+    public function lesLivresAction(Paginator $paginator, ObjectManager $em, $page = 1, Request $request)
+    {
+        
+        $query = $em->createQuery('SELECT li FROM AppBundle:Livre li ORDER BY li.titre ASC');
+        
+        $pagination = $paginator->paginate($query,$page);
+        
+        return $this->render('default/les-livres.html.twig', [
+            'pagination' => $pagination
+        ]);
+        
+    }
+        
 
     /**
      * @Route("/livre/{slug}", name = "detail_livre")
