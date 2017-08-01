@@ -107,5 +107,15 @@ knp_paginator:
         pagination: 'default/pagination.html.twig'
         
 easy_admin:
+    site_name: 'Admin'
     entities:
-        - AppBundle\Entity\Livre
+        Livre:
+            class: AppBundle\Entity\Livre
+            form:
+                fields:
+                    - 'titre'
+                    - 'description'
+                    # - { property: 'couverture', type: 'file' }
+                    - { property: 'critiques', type: 'collection', type_options: { entry_type: 'AppBundle\Form\CritiqueType', by_reference: false } }
+            list:
+                fields: ['titre', 'critiques']
