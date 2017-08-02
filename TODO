@@ -1,2 +1,10 @@
 
-docker-compose exec phpapp bin/console assets:install web --symlink --relative
+docker-compose exec phpapp bin/console cache:clear --no-warmup
+
+docker-compose exec phpapp bin/console doctrine:database:drop --force
+
+docker-compose exec phpapp bin/console doctrine:database:create
+
+docker-compose exec phpapp bin/console doctrine:schema:update --force
+
+

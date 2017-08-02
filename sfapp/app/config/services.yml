@@ -63,9 +63,9 @@ services:
     #     tags:
     #         - { name: kernel.event_listener, event: app.livre.vu, method: envoiMail }
 
-    AppBundle\EventListener\LivreSubscriber:
-        tags:
-            - { name: doctrine.event_subscriber }
+    # AppBundle\EventListener\LivreSubscriber:
+    #     tags:
+    #         - { name: doctrine.event_subscriber }
     
     # AppBundle\DataCollector\RequestCollector:
     #     tags:
@@ -78,12 +78,12 @@ services:
     #             # priority: 300
     #     public: false
         
-    AppBundle\Service\FileUploader:
-        arguments:
-            $targetDir: '%couverture_directory%'
+    # AppBundle\Service\FileUploader:
+    #     arguments:
+    #         $targetDir: '%couverture_directory%'
             
-    AppBundle\EventListener\CouvertureUploadListener:
-        tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            #- { name: doctrine.event_listener, event: postLoad }
+    # AppBundle\EventListener\CouvertureUploadListener:
+    #     tags:
+    #         - { name: doctrine.event_listener, event: prePersist }
+    #         - { name: doctrine.event_listener, event: preUpdate }
+    #         #- { name: doctrine.event_listener, event: postLoad }

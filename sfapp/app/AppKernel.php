@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new AcmeBundle\AcmeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

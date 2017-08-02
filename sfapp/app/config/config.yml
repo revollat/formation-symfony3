@@ -8,6 +8,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    app.path.livre_couvertures: /uploads/couvertures
 
 framework:
     #esi: ~
@@ -115,7 +116,19 @@ easy_admin:
                 fields:
                     - 'titre'
                     - 'description'
-                    # - { property: 'couverture', type: 'file' }
+                    - { property: 'couvertureFile', type: 'vich_image' }
                     - { property: 'critiques', type: 'collection', type_options: { entry_type: 'AppBundle\Form\CritiqueType', by_reference: false } }
             list:
-                fields: ['titre', 'critiques']
+                fields:
+                    - 'titre'
+                    - { property: 'couverture', type: 'image', base_path: '%app.path.livre_couvertures%' }
+                    - 'critiques'
+                    - { property: 'description', template: 'description-dans-liste.html.twig' }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        livre_image:
+            uri_prefix:         '%app.path.livre_couvertures%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/couvertures'
+            namer: vich_uploader.namer_uniqid

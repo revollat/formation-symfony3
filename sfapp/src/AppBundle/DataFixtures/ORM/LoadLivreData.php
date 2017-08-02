@@ -15,10 +15,15 @@ class LoadLivreData extends AbstractFixture implements OrderedFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         
         for($i=1;$i<=10;$i++){
+            
+            $date_courante = new \DateTime();
+            
             $livre = new Livre();
+            
             $livre->setTitre($faker->sentence($nbWords = 3, $variableNbWords = true));
             $livre->setDescription($faker->text($maxNbChars = 500));
-            
+            $livre->setCreated($date_courante);
+            $livre->setUpdated($date_courante);
             $this->addReference('livre' . $i , $livre);
              
             $manager->persist($livre);

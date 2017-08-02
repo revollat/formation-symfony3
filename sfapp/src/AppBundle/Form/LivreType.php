@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class LivreType extends AbstractType
 {
@@ -20,9 +21,17 @@ class LivreType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('couverture', FileType::class,  ['label' => 'Illustration de couverture'])
         ;
 
+        $builder->add('couvertureFile', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+            'imagine_pattern' => 'livre_listing',
+        ]);
+            
         $builder->add('critiques', CollectionType::class, array(
             'entry_type' => CritiqueType::class,
             'allow_add'  => true,
@@ -31,20 +40,22 @@ class LivreType extends AbstractType
             //'label' => false
         ));
         
-        $builder->get('couverture')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($image_name) {
-                    if($image_name)
-                    {
-                        return new File('/var/www/symfony/web/uploads/couvertures/'.$image_name);
-                    }
-                    return null;
-                },
-                function ($image_file) {
-                    return $image_file;
-                }
-            ))
-        ;
+        
+        
+        // $builder->get('couverture')
+        //     ->addModelTransformer(new CallbackTransformer(
+        //         function ($image_name) {
+        //             if($image_name)
+        //             {
+        //                 return new File('/var/www/symfony/web/uploads/couvertures/'.$image_name);
+        //             }
+        //             return null;
+        //         },
+        //         function ($image_file) {
+        //             return $image_file;
+        //         }
+        //     ))
+        // ;
         
     }
     
